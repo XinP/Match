@@ -1,5 +1,5 @@
 {
-  "ver": "1.0.26",
+  "ver": "1.0.27",
   "importer": "image",
   "imported": true,
   "uuid": "adb100cb-a042-46b3-9914-2fc15946c6aa",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "adb100cb-a042-46b3-9914-2fc15946c6aa@f9941"
+    "redirect": "adb100cb-a042-46b3-9914-2fc15946c6aa@6c48a"
   }
 }
