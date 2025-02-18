@@ -1,0 +1,12 @@
+{
+  "ver": "4.0.23",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "16023770-3b4b-4b58-8c42-4ac3da295c8c",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "moduleId": "project:///assets/scripts/game/CubeMesh.js",
+    "simulateGlobals": []
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "__version__": "3.1.9",
+  "mini_is_AST_obfus": true,
+  "mini_identifierNamesGenerator": "2",
+  "mini_renameGlobals": false
+}

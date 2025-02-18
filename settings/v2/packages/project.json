@@ -1,0 +1,48 @@
+{
+  "__version__": "1.0.6",
+  "general": {
+    "designResolution": {
+      "width": 720,
+      "height": 1280,
+      "fitWidth": false,
+      "fitHeight": true
+    }
+  },
+  "physics": {
+    "collisionGroups": [
+      {
+        "index": 1,
+        "name": "cube"
+      },
+      {
+        "index": 2,
+        "name": "ground"
+      },
+      {
+        "index": 3,
+        "name": "pickCube"
+      }
+    ],
+    "collisionMatrix": {
+      "0": 1,
+      "1": 6,
+      "2": 2,
+      "3": 0
+    },
+    "maxSubSteps": 1,
+    "sleepThreshold": 0.4,
+    "gravity": {
+      "y": -15
+    },
+    "allowSleep": true,
+    "fixedTimeStep": 0.016667,
+    "autoSimulation": true
+  },
+  "custom_joint_texture_layouts": [],
+  "layer": [
+    {
+      "name": "UI_TOP_2D",
+      "value": 1
+    }
+  ]
+}
