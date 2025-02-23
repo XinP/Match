@@ -1,8 +1,12 @@
 import { _decorator, Camera, clamp, Collider, Color, Component, director, dynamicAtlasManager, EventTouch, geometry, Input, input, instantiate, Layers, macro, MeshRenderer, Node, NodePool, PhysicsSystem, Prefab, profiler, Quat, randomRangeInt, RigidBody, SpriteAtlas, toDegree, toRadian, Tween, tween, UIOpacity, UITransform, Vec3, view } from 'cc';
 import { CubeMesh } from './Mesh';
 import { Levels } from './Levels';
+import { adManager, PlatformUtils } from '../ttPlugin';
+
 const { ccclass, property } = _decorator;
 
+const ButtonLimit = 3;
+const DailyUserInfoKey = 'daliy_user_info';
 //device.getFormatFeatures(FormData.RGBA32F)
 
 @ccclass('Cubes')
@@ -34,13 +38,22 @@ export class Cubes extends Component {
   private _nodePool:NodePool = new NodePool();
   private _localBuffer:Float32Array = new Float32Array(4);
 
-
   private _effectInc:number = 0;
   private _matchCount:number = 0;
   private _paiSelectCount:number = 0; //已选择总数
   private _paiRands:Array<string> = new Array(); //新随机队列
   private _paiSelets:Array<Array<Node>> = new Array();  //已选麻将
   private _paiInWorld:Map<string,Array<Node>> = new Map(); //未选麻将
+  
+  ///每个按钮的每次触发限制，超过后需要观看广告
+  private static ;
+  private dailyInfo = {
+    updateTime: null, 
+    xiPaiCount: ButtonLimit,
+    fanPaiCount: ButtonLimit,
+    xiaoChuCount: ButtonLimit,
+    huituiCount: ButtonLimit,
+  };
 //电子邮件puhalskijsemen@gmail.com
 //网站 开vpn打开 http://web3incubators.com/
 //电报https://t.me/gamecode999
@@ -188,8 +201,26 @@ export class Cubes extends Component {
     this.selcetNode.setPosition(0,0,scale*bg.scale.y + offset);
     
   }
+  //游戏启动时只执行一次
+  private updateDailyInfo(){
+    const tInfo = PlatformUtils.GetStorageData(DailyUserInfoKey);
+    if(!tInfo){
+      console.log('tInfo is null');
+      return;
+    }
+
+    const date = new Date();
+    const dateStr = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
+
+    if(dateStr == tInfo.updateTime){
+      this.dailyInfo = tInfo;
+    }
+    
+  }
 
   protected onLoad(): void {
+      this.updateDailyInfo();
+
       this.fixCamera();
       this.fixSceneUI();
       profiler.showStats();
@@ -625,7 +656,7 @@ export class Cubes extends Component {
 
   /*退牌*/
   tuiPai(){
-
+    adManager.showRewardedVideoAd();
     let end  = this._paiSelets.length - 1;
     if(end >= 0){
       let nodes = this._paiSelets[end];
